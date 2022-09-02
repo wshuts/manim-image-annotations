@@ -1,4 +1,5 @@
 from manim import *
+from manim.utils.unit import Percent, Pixels
 
 class ImageWithZoomedScene(ZoomedScene):
     def __init__(self, **kwargs):
@@ -17,6 +18,7 @@ class ImageWithZoomedScene(ZoomedScene):
     def construct(self):
         image = ImageMobject("smith-chart-001.png")
         self.add(image)
+        image.shift(30*Pixels*(0.1*LEFT + UP))
         
         zoomed_camera = self.zoomed_camera
         frame = zoomed_camera.frame
@@ -25,7 +27,7 @@ class ImageWithZoomedScene(ZoomedScene):
 
         zoomed_display = self.zoomed_display
         zoomed_display.shift(DOWN)
-        
+
         zoomed_display_frame = zoomed_display.display_frame
         zoomed_display_frame.set_color(RED)
 
@@ -35,20 +37,20 @@ class ImageWithZoomedScene(ZoomedScene):
         unfold_camera = UpdateFromFunc(zd_rect, lambda rect: rect.replace(zoomed_display))
 
         self.play(Create(frame))
-        self.activate_zooming()
-        self.play(self.get_zoomed_display_pop_out_animation(), unfold_camera)
+        # self.activate_zooming()
+        # self.play(self.get_zoomed_display_pop_out_animation(), unfold_camera)
         scale_factor = [0.5, 1.5, 0]
-        self.play(
-            frame.animate.scale(scale_factor),
-            zoomed_display.animate.scale(scale_factor)
-        )
+        # self.play(
+        #     frame.animate.scale(scale_factor),
+        #     zoomed_display.animate.scale(scale_factor)
+        # )
         self.wait()
-        self.play(ScaleInPlace(zoomed_display, 2))
+        # self.play(ScaleInPlace(zoomed_display, 2))
         self.wait()
-        self.play(frame.animate.shift(2.5 * DOWN))
+        # self.play(frame.animate.shift(2.5 * DOWN))
         self.wait()
-        self.play(self.get_zoomed_display_pop_out_animation(), unfold_camera, rate_func=lambda t: smooth(1 - t))
-        self.play(Uncreate(zoomed_display_frame), FadeOut(frame))
+        # self.play(self.get_zoomed_display_pop_out_animation(), unfold_camera, rate_func=lambda t: smooth(1 - t))
+        # self.play(Uncreate(zoomed_display_frame), FadeOut(frame))
         self.wait()
 
 with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": True}):
