@@ -31,15 +31,15 @@ class ImageWithZoomedScene(ZoomedScene):
         zoomed_display_frame = zoomed_display.display_frame
         zoomed_display_frame.set_color(RED)
 
-        # zd_rect = BackgroundRectangle(zoomed_display, fill_opacity=0, buff=MED_SMALL_BUFF)
-        # self.add_foreground_mobject(zd_rect)
+        zd_rect = BackgroundRectangle(zoomed_display, fill_opacity=0, buff=MED_SMALL_BUFF)
+        self.add_foreground_mobject(zd_rect)
 
-        # unfold_camera = UpdateFromFunc(zd_rect, lambda rect: rect.replace(zoomed_display))
+        unfold_camera = UpdateFromFunc(zd_rect, lambda rect: rect.replace(zoomed_display))
 
         self.play(Create(frame))
 
         self.activate_zooming()
-        self.play(self.get_zoomed_display_pop_out_animation())
+        self.play(self.get_zoomed_display_pop_out_animation(), unfold_camera)
 
         scale_factor = [0.5, 1.5, 0]
         self.play(
@@ -47,7 +47,7 @@ class ImageWithZoomedScene(ZoomedScene):
             zoomed_display.animate.scale(scale_factor)
         )
         self.wait()
-        
+
         # self.play(ScaleInPlace(zoomed_display, 2))
         self.wait()
         # self.play(frame.animate.shift(2.5 * DOWN))
