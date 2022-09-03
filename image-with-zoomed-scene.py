@@ -48,8 +48,9 @@ class ImageWithZoomedScene(ZoomedScene):
         )
         self.wait()
 
-        # self.play(ScaleInPlace(zoomed_display, 2))
+        self.play(ScaleInPlace(zoomed_display, 2))
         self.wait()
+        
         # self.play(frame.animate.shift(2.5 * DOWN))
         self.wait()
         # self.play(self.get_zoomed_display_pop_out_animation(), unfold_camera, rate_func=lambda t: smooth(1 - t))
