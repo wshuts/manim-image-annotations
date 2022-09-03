@@ -38,7 +38,7 @@ class ImageWithZoomedScene(ZoomedScene):
 
         self.play(Create(frame))
         self.activate_zooming()
-        # self.play(self.get_zoomed_display_pop_out_animation())
+        self.play(self.get_zoomed_display_pop_out_animation())
         scale_factor = [0.5, 1.5, 0]
         # self.play(
         #     frame.animate.scale(scale_factor),
